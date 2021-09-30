@@ -16,6 +16,11 @@ Hexagon::Hexagon(std::istream &is)
       is >> points_[i];
 }
 
+size_t Hexagon::VertexesNumber()
+{
+   return sizeof(points_) / sizeof(points_[0]);
+}
+
 double Hexagon::Area()
 {
    double s = points_[VertexesNumber() - 1].CrossProduct(points_[0]);

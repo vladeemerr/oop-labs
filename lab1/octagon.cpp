@@ -16,6 +16,11 @@ Octagon::Octagon(std::istream &is)
       is >> points_[i];
 }
 
+size_t Octagon::VertexesNumber()
+{
+   return sizeof(points_) / sizeof(points_[0]);
+}
+
 double Octagon::Area()
 {
    double s = points_[VertexesNumber() - 1].CrossProduct(points_[0]);

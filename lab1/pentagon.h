@@ -11,11 +11,7 @@ public:
    Pentagon(const Pentagon &pentagon);
    Pentagon(std::istream &is);
 
-   constexpr size_t VertexesNumber()
-   {
-      return sizeof(points_) / sizeof(points_[0]);
-   }
-
+   size_t VertexesNumber();
    double Area();
    void Print(std::ostream &os);
 
