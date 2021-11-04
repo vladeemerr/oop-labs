@@ -1,8 +1,9 @@
 {
    "variant": 6,
    "figures": [ "Pentagon", "Hexagon", "Octagon" ],
-   "containers": [],
+   "containers": [ "TVector" ],
    "finished_labs": {
-      "lab1": "lab1"
+      "lab1": "lab1",
+      "lab2": "lab2"
    }
 }
