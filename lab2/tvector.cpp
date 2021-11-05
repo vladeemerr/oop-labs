@@ -3,23 +3,25 @@
 #include <cstring>
 
 enum {
-   INITIAL_CAPACITY = 32
+   INITIAL_CAPACITY = 32,
 };
 
 TVector::TVector()
-   : data_(new Pentagon[INITIAL_CAPACITY]), 
-     size_(0), capacity_(INITIAL_CAPACITY) {}
+   : data_(nullptr), size_(0), capacity_(INITIAL_CAPACITY)
+{
+   data_ = (Pentagon *)malloc(capacity_ * sizeof(Pentagon));
+}
 
 TVector::TVector(const TVector &vector)
-   : data_(new Pentagon[vector.capacity_]),
-     size_(vector.size_), capacity_(vector.capacity_)
+   : data_(nullptr), size_(vector.size_), capacity_(vector.capacity_)
 {
+   data_ = (Pentagon *)malloc(vector.capacity_ * sizeof(Pentagon));
    std::memcpy(data_, vector.data_, capacity_ * sizeof(Pentagon));
 }
 
 TVector::~TVector()
 {
-   delete[] data_;
+   free(data_);
    data_ = nullptr;
    size_ = 0;
    capacity_ = 0;
