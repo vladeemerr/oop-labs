@@ -6,6 +6,20 @@
 
 class TVector {
 public:
+   class Item {
+   public:
+      Item(const std::shared_ptr<Pentagon> &pentagon);
+
+      friend std::ostream &operator<<(std::ostream &os, const Item &pentagon);
+
+      std::shared_ptr<Pentagon> GetPtr();
+      
+      virtual ~Item() {};
+
+   private:
+      std::shared_ptr<Pentagon> pentagon_;
+   };
+   
    TVector();
    TVector(const TVector &vector);
 
@@ -25,6 +39,6 @@ public:
    friend std::ostream &operator<<(std::ostream &os, const TVector &vector);
 
 private:
-   std::shared_ptr<Pentagon> *data_;
+   std::shared_ptr<TVector::Item> *data_;
    size_t size_, capacity_;
 };
