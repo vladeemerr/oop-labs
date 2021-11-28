@@ -27,7 +27,7 @@ public:
       return data_[index];
    }
 
-   inline std::shared_ptr<Pentagon> Last() const
+   inline std::shared_ptr<Pentagon> &Last() const
    {
       return data_[length_ - 1];
    }

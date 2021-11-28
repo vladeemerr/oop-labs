@@ -65,8 +65,10 @@ std::ostream &operator<<(std::ostream &os, const TVector &vector)
 {
    const size_t last = vector.length_ - 1;
 
+   os << '[';
    for (size_t i = 0; i < vector.length_; ++i)
-      os << *vector.data_[i] << ((i != last) ? '\n' : '\0');
+      os << (*vector.data_[i]).Area() << ((i != last) ? ' ' : '\0');
+   os << ']';
 
    return os;
 }
