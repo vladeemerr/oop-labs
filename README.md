@@ -7,5 +7,5 @@
 - [x] Templates
 - [x] Iterators
 - [x] Custom data type
-- [ ] Operator overloading and user-defined literal
+- [x] Operator overloading and user-defined literal
 - [ ] Allocators

@@ -15,7 +15,7 @@ public:
       : lo_(val32), hi_(0) {}
 
    inline BitString(uint64_t val64)
-      : lo_(val64 & 0xFFFF), hi_(val64 >> 32) {}
+      : lo_(val64 & 0xFFFFFFFF), hi_(val64 >> 32) {}
 
    inline BitString(uint32_t lo, uint64_t hi)
       : lo_(lo), hi_(hi) {}
@@ -179,3 +179,6 @@ private:
    uint32_t lo_;
    uint64_t hi_;
 };
+
+// NOTE: Usage `"010101001011001001"_bitstr`
+extern BitString operator "" _bitstr(const char *, size_t);

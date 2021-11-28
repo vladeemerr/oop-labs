@@ -142,8 +142,8 @@ std::ostream &operator<<(std::ostream &os, const TVector<T> &vector)
 
    os << '[';
    for (size_t i = 0; i < vector.length_; ++i)
-      os << (*vector.data_[i]).Area() << ((i != last) ? ' ': '\0');
-   os << ']';
+      os << (*vector.data_[i]).Area() << ((i != last) ? ' ' : '\0');
+   os << ']'
 
    return os;
 }

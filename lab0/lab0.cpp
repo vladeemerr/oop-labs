@@ -5,8 +5,8 @@
 
 int main()
 {
-   BitString s(0x12381493ul, 0xF000000000000000 | 0xea81894bcca922ull);
-
+   BitString s = "10101010101010101010101010101010101010101010101010101011001100110011001100110011001100"_bitstr;
+   
    std::cout << s << std::endl;
    for (int i = 0; i < 96; ++i) { 
       s.ShiftRight(1);

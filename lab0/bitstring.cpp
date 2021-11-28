@@ -1,5 +1,7 @@
 #include "bitstring.h"
 
+#include <iostream>
+
 BitString &BitString::ShiftLeft(std::size_t n)
 {
    hi_ = (hi_ << n) | ((n < 32) ? (lo_ >> (32 - n)) : ((uint64_t)lo_ << (n - 32)));
@@ -60,4 +62,21 @@ std::ostream &operator<<(std::ostream &os, const BitString &bitstring)
       os << "01"[(bitstring.lo_ >> i) & 1];
 
    return os;
+}
+
+BitString operator "" _bitstr(const char *str, size_t n)
+{
+   uint32_t lo = 0;
+   uint64_t hi = 0;
+
+   size_t cnt = 0;
+
+   ssize_t i;
+   for (i = n - 1; i >= 0 && cnt < 32; --i, ++cnt)
+      lo |= ((str[i] - '0') << cnt);
+
+   for (cnt = 0; i >= 0 && cnt < 64; --i, ++cnt)
+      hi |= ((uint64_t)(str[i] - '0') << cnt);
+   
+   return BitString(lo, hi);
 }
