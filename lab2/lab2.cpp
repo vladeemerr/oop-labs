@@ -1,4 +1,4 @@
-///usr/bin/g++ -g -o "${0%.cpp}" *.cpp && exit
+///usr/bin/g++ -g -o "${0%.cpp}" *.cpp -static-libasan -fsanitize=address,leak && exit
 #include <iostream>
 
 #include "tvector.h"
