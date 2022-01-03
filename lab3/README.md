@@ -1,4 +1,4 @@
-# Lab #1: Introduction to C++
+# Lab #3: Inheritance
 
 ## Goals
 - Implementing classes in C++

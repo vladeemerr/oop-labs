@@ -3,6 +3,8 @@
 #include "point.h"
 #include "figure.h"
 
+#include "tallocation_block.h"
+
 class Pentagon : public Figure {
 public:
    inline Pentagon()
@@ -43,6 +45,18 @@ public:
       return !(*this == other);
    }
 
+   inline void *operator new(size_t size)
+   {
+      return _alloc_block.Allocate(size);
+   }
+
+   inline void operator delete(void *pointer)
+   {
+      _alloc_block.Free(pointer);
+   }
+
 private:
    Point points_[5];
+
+   static TAllocationBlock _alloc_block;
 };

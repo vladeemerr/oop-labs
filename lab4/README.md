@@ -1,1 +1,1 @@
-# Lab #2: Introduction to C++
+# Lab #4: Abstract data types

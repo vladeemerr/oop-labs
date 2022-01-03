@@ -2,6 +2,8 @@
 
 #include <cstring>
 
+TAllocationBlock Pentagon::_alloc_block(sizeof(Pentagon), 32);
+
 double Pentagon::Area() const
 {
    double s = points_[VertexesNumber() - 1].CrossProduct(points_[0]);

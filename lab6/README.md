@@ -1,1 +1,1 @@
-# Lab #4
+# Lab #6: Templates
