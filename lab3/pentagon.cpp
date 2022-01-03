@@ -1,8 +1,26 @@
 #include "pentagon.h"
 
-#include <cstring>
+Pentagon::Pentagon()
+   : points_{} {}
 
-double Pentagon::Area() const
+Pentagon::Pentagon(Point p0, Point p1, Point p2, Point p3, Point p4)
+   : points_{p0, p1, p2, p3, p4} {}
+
+Pentagon::Pentagon(const Pentagon &pentagon)
+   : points_(pentagon.points_) {}
+
+Pentagon::Pentagon(std::istream &is)
+{
+   for (size_t i = 0; i < VertexesNumber(); ++i)
+      is >> points_[i];
+}
+
+size_t Pentagon::VertexesNumber()
+{
+   return sizeof(points_) / sizeof(points_[0]);
+}
+
+double Pentagon::Area()
 {
    double s = points_[VertexesNumber() - 1].CrossProduct(points_[0]);
    for (size_t i = 0; i < VertexesNumber() - 1; ++i)
@@ -10,31 +28,10 @@ double Pentagon::Area() const
    return abs(s) / 2.;
 }
 
-std::istream &operator>>(std::istream &is, Pentagon &pentagon)
+void Pentagon::Print(std::ostream &os)
 {
-   for (size_t i = 0; i < pentagon.VertexesNumber(); ++i)
-      is >> pentagon.points_[i];
-   return is;
-}
-
-std::ostream &operator<<(std::ostream &os, const Pentagon &pentagon)
-{
-   const size_t last = pentagon.VertexesNumber() - 1;
-   
    os << "Pentagon: ";
-   for (size_t i = 0; i < pentagon.VertexesNumber(); ++i)
-      os << pentagon.points_[i] << ((i != last) ? ' ' : '\0');
-
-   return os;
-}
-
-Pentagon &Pentagon::operator=(const Pentagon &other)
-{
-   std::memcpy(points_, other.points_, sizeof(points_));
-   return *this;
-}
-
-bool Pentagon::operator==(const Pentagon &other) const
-{
-   return std::memcmp(points_, other.points_, sizeof(points_)) == 0;
+   for (size_t i = 0; i < VertexesNumber(); ++i)
+      os << points_[i] << ' ';
+   os << '\n';
 }

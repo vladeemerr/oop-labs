@@ -1,35 +1,84 @@
-///usr/bin/g++ -g -o "${0%.cpp}" *.cpp -static-libasan -fsanitize=leak,address && exit
+///usr/bin/g++ -g -o "${0%.cpp}" *.cpp -static-libasan -fsanitize=address,leak && exit
 #include <iostream>
 
 #include "tvector.h"
-#include "pentagon.h"
 
 #define newl '\n'
 
 int main()
 {
-   TVector<Pentagon> t;
+   { // NOTE: TVector constructor
+      TVector t0;
+      std::cout << "`t0` has " << t0.Length() << " elements and is "
+                << (t0.Empty() ? "empty" : "not empty") << newl;
 
-   {
-      auto p = std::make_shared<Pentagon>(Point{52.f, 1.3f}, Point{41.f, 34.f},
-         Point{16.f, 17.f}, Point{123.f, 43.f}, Point{126.f, 173.f});
-      t.InsertLast(p);
-   }
+      TVector t3(t0);
+      std::cout << "`t3` has copied `t2` (Length = " << t3.Length() << "):"
+                << newl << t3;
+   } std::cout << newl;
 
-   t.InsertLast(std::make_shared<Pentagon>(Point{1.f, 2.f}, Point{3.f, 4.f}, 
-      Point{5.f, 6.f}, Point{7.f, 8.f}, Point{9.f, 10.f}));
+   { // NOTE: TVector storage manipulation
+      TVector t0;
+      std::cout << "`t0` has " << t0.Length() << " elements and is "
+                << (t0.Empty() ? "empty" : "not empty") << newl;
 
-   t.EmplaceLast(Pentagon({10.f, 9.f}, {8.f, 7.f}, {6.f, 5.f}, {4.f, 3.f}, {2.f, 1.f}));
+      t0.InsertLast({{1., 2.}, {3., 4.}, {0., 5.}, {6., 7.}, {10., 9.}});
+      t0.InsertLast({{3., 1.}, {10., 42.}, {20., 15.}, {76., 27.}, {0., 3.}});
+      t0.InsertLast({{128., 391.}, {484., 381.}, {132., 339.}, {93., 415.}, {19., 5.}});
+      std::cout << "`t0` has " << t0.Length() << " elements and is "
+                << (t0.Empty() ? "empty" : "not empty") 
+                << ", has got these elements:" << newl << t0 << newl;
 
-   t.Clear();
+      std::cout << "Extracted element `t0[1]`:" << newl << t0[1] << newl;
 
-   t.EmplaceLast(Pentagon({1.f, 9.f}, {8.f, 7.f}, {6.f, 5.f}, {4.f, 3.f}, {2.f, 1.f}));
-   t.EmplaceLast(Pentagon({2.f, 9.f}, {8.f, 7.f}, {6.f, 5.f}, {4.f, 3.f}, {2.f, 1.f}));
-   t.EmplaceLast(Pentagon({3.f, 9.f}, {8.f, 7.f}, {6.f, 5.f}, {4.f, 3.f}, {2.f, 1.f}));
+      t0.RemoveLast();
+      std::cout << "`t0` has " << t0.Length() << " elements and is "
+                << (t0.Empty() ? "empty" : "not empty") 
+                << ", has got these elements:" << newl << t0 << newl;
 
-   std::cout << t.Length() << ' ' << t.Empty() << std::endl;
+      t0[0] = {{10., 9.}, {8., 7.}, {6., 5.}, {4., 3.}, {2., 1.}};
+      std::cout << "First element of `t0` has been changed:" << newl << t0 << newl;
 
-   std::cout << t << std::endl;
+      t0.Clear();
+      std::cout << "`t0` has " << t0.Length() << " elements and is "
+                << (t0.Empty() ? "empty" : "not empty") << newl;
+   } std::cout << newl;
    
+   { // NOTE: Object copying
+      Pentagon p0({1., 2.}, {3., 4.}, {5., 6.}, {7., 8.}, {9., 10.});
+      std::cout << "Object to copy " << p0;
+
+      Pentagon p1;
+      std::cout << "New object before copying " << p1;
+
+      p1 = p0;
+      std::cout << "New object after copying " << p1;
+   } std::cout << newl;
+
+   { // NOTE: Equality test
+      Pentagon p0({1., 2.}, {3., 4.}, {5., 6.}, {7., 8.}, {9., 10.});
+      Pentagon p1({10., 9.}, {8., 7.}, {6., 5.}, {4., 3.}, {2., 1.});
+      Pentagon p2 = p0;
+
+      std::cout << "p0 and p1 are " << ((p0 == p1) ? "equal" : "not equal") << newl;
+      std::cout << "p0 and p1 are " << ((p0 == p2) ? "equal" : "not equal") << newl;
+
+      std::cout << "p0 and NOT p1 are " << ((p0 != p1) ? "equal" : "not equal") << newl;
+      std::cout << "p0 and NOT p1 are " << ((p0 != p2) ? "equal" : "not equal") << newl;
+   } std::cout << newl;
+
+   { // NOTE: I/O backwards-compatibility
+      std::cout << "Old way of input/output:" << newl;
+      Pentagon p0(std::cin);
+      p0.Print(std::cout);
+
+      std::cout << newl;
+
+      std::cout << "New way of input/output:" << newl;
+      Pentagon p;
+      std::cin >> p;
+      std::cout << p;
+   } std::cout << newl;
+
    return 0;
 }

@@ -1,1 +1,1 @@
-# Lab #4
+# Lab #2: Introduction to C++

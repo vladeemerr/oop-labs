@@ -2,12 +2,13 @@
 #include <iostream>
 
 #include "tvector.h"
+#include "pentagon.h"
 
 #define newl '\n'
 
 int main()
 {
-   TVector t;
+   TVector<Pentagon> t;
 
    {
       auto p = std::make_shared<Pentagon>(Point{52.f, 1.3f}, Point{41.f, 34.f},

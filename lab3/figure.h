@@ -2,9 +2,10 @@
 
 #include <ostream>
 
-class Figure {
+class Figure
+{
 public:
-   virtual size_t VertexesNumber() const = 0;
-   virtual double Area() const = 0;
-   virtual void Print(std::ostream &) const = 0;
+   virtual size_t VertexesNumber() = 0;
+   virtual double Area() = 0;
+   virtual void Print(std::ostream &os) = 0;
 };

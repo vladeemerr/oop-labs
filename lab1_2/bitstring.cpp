@@ -1,7 +1,5 @@
 #include "bitstring.h"
 
-#include <iostream>
-
 BitString &BitString::ShiftLeft(std::size_t n)
 {
    hi_ = (hi_ << n) | ((n < 32) ? (lo_ >> (32 - n)) : ((uint64_t)lo_ << (n - 32)));

@@ -1,20 +1,25 @@
 {
    "variant": 6,
    "figures": [ "Pentagon", "Hexagon", "Octagon" ],
-   "containers": [ "TVector" ],
+   "containers": [ "TVector", "TStack" ],
    "finished_labs": {
-      "lab1:5": "lab1",
-      "lab2:4": "lab2",
-      "lab3:4": "lab3",
-      "lab4:4": "lab4",
-      "lab5:4": "lab5",
-      "lab6:5": "__in_progress__",
-      "lab7:5": "__in_progress__",
-      "lab0.1:5": "lab0",
-      "lab0.2:5": "lab0"
+      "lab0.1:5": "lab1_2",
+      "lab0.2:5": "lab1_2",
+      "lab1:5": "lab3",
+      "lab2:4": "lab4",
+      "lab3:4": "lab5",
+      "lab4:4": "lab6",
+      "lab5:5": "lab7",
+      "lab6:5": "lab8"
    },
    "reports": [
+      "lab0.1",
+      "lab0.2",
       "lab1",
-      "lab2"
+      "lab2",
+      "lab3",
+      "lab4",
+      "lab5",
+      "lab6"
    ]
 }

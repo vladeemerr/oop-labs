@@ -2,12 +2,13 @@
 #include <iostream>
 
 #include "tvector.h"
+#include "pentagon.h"
 
 #define newl '\n'
 
 int main()
 {
-   TVector t;
+   TVector<Pentagon> t;
 
    {
       auto p = std::make_shared<Pentagon>(Point{52.f, 1.3f}, Point{41.f, 34.f},
@@ -26,9 +27,10 @@ int main()
    t.EmplaceLast(Pentagon({2.f, 9.f}, {8.f, 7.f}, {6.f, 5.f}, {4.f, 3.f}, {2.f, 1.f}));
    t.EmplaceLast(Pentagon({3.f, 9.f}, {8.f, 7.f}, {6.f, 5.f}, {4.f, 3.f}, {2.f, 1.f}));
 
-   std::cout << t.Length() << ' ' << t.Empty() << std::endl;
-
    std::cout << t << std::endl;
+
+   for (auto i = t.begin(); i != t.end(); ++i)
+      std::cout << *i << std::endl;
    
    return 0;
 }
